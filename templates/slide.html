@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        <title>網管小組教學資源網</title>
+        <style>
+            .header{
+                background-color:#BE77FF;
+                height:80px;
+                display:flex;
+            }
+            #mainhead{
+                padding:0px;
+                margin-left:12px;
+            }
+            #rhdisplay{
+                display:flex;
+                font-size:25px;
+            }
+            .needhover:hover{
+                background-color:#ffe6ff;
+            }
+            table {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            td {
+                border: 1px solid black;
+                padding: 2px;
+            }
+            th {
+                border: 1px solid black;
+                padding: 2px;
+            }
+        </style>
+        <link href="/static/hsnucnmc.png" rel="icon">
+
+    </head>
+    <body>
+        <div class="header">
+            <div id="mainhead"><h1>網管小組教學資源網</h1></div>
+            <div id="right-header">
+                <ul id="rhdisplay">
+                    <ol class="needhover"><a href="https://www.hs.ntnu.edu.tw">校網</a></ol>
+                    <ol class="needhover"><a href="https://cnmc.tw">社網</a></ol>
+                    <ol class="needhover"><a href="/slide">社課簡報</a></ol>
+                    <ol class="needhover"><a href="/others">學習資源</a></ol>
+                    <ol class="needhover"><a href="/">回首頁</a></ol>
+            </div>
+        </div>
+        <div id="slide">
+        <form action="/slide" method="POST">
+            <option value="" disabled selected>請選擇一堂社課</option>
+            <select name="slide">
+                {% for j in allinfos %}
+                <option value={{j.date}}>{{j.date}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit"></input>
+        </form>
+        <table>
+            <tr>
+                <td>日期</td>
+                <td>社課主題</td>
+                <td>簡介</td>
+                <td>簡報連結</td>
+                <td>備註</td>
+            </tr>
+            {% for i in infos %}
+            <tr>
+                <td>{{i.date}}</td>
+                <td>{{i.topic}}</td>
+                <td>{{i.intro}}</td>
+                <td value="{{i.date}}"><a href="{{i.link}}" target="_blank">點選</a></td>
+                <td>{{i.others}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </body>
+</html>
+
